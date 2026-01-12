@@ -1,0 +1,43 @@
+body {
+	background-color: var(--background);
+	color: var(--text-primary);
+	font-family: var(--ff-primary);
+}
+
+#root {
+	--max-width: 460px;
+	--padding-inline-mobile: 1.5rem;
+	--padding-inline-desktop: 2.5rem;
+	--margin-block-mobile: 1.5rem;
+	--margin-block-desktop: 3.625rem;
+	inline-size: min(var(--max-width), 100% - var(--padding-inline-mobile) * 2);
+	margin-inline: var(--margin-block-mobile) auto;
+	display: flex;
+	align-items: center;
+	height: 100vh;
+}
+
+.new-game-menu {
+	inline-size: 100%;
+	display: grid;
+	gap: 2rem;
+}
+
+.new-game-menu img {
+	margin: 0 auto;
+}
+
+.main-header {
+	background-color: var(--semi-dark-navy);
+	padding: 1.5rem;
+	border-radius: 1rem;
+	text-align: center;
+
+	margin-block-end: 0.5rem;
+	box-shadow: var(--shadow-md);
+}
+
+.new-game-btns {
+	display: grid;
+	gap: 1rem;
+}

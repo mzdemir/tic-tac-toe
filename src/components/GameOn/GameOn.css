@@ -1,0 +1,53 @@
+.game-on-container {
+	flex: 1;
+	display: grid;
+	gap: 4rem;
+}
+
+.game-on-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.turn-indicator {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	block-size: 2.5rem;
+	padding: 0.5rem 0.875rem;
+	background-color: var(--semi-dark-navy);
+
+	border-radius: 0.375rem;
+	padding-block-end: 0.875rem;
+	box-shadow: inset var(--shadow-sm);
+}
+
+.turn-indicator svg {
+	inline-size: 1rem;
+	block-size: 1rem;
+}
+
+.restart-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	inline-size: 2.5rem;
+	block-size: 2.5rem;
+
+	border-radius: 0.375rem;
+	box-shadow: inset var(--shadow-silver);
+}
+
+.board {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 1.25rem;
+}
+
+.cell {
+	background-color: var(--semi-dark-navy);
+	block-size: 6rem;
+	inline-size: 6rem;
+}
