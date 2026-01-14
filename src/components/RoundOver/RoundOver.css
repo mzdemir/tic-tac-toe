@@ -1,0 +1,23 @@
+.round-over {
+	background-color: var(--semi-dark-navy);
+	padding-block: 3rem;
+	inline-size: 100%;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.winner-player {
+	font-weight: var(--fw-bold);
+	text-transform: uppercase;
+}
+
+.winner-mark {
+	color: var(--yellow-light);
+}
+
+.btns {
+	display: flex;
+	gap: 1rem;
+}

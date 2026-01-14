@@ -76,7 +76,7 @@
 	--shadow-cyan-hover: 0 8px 0 0 #159d97;
 	--shadow-yellow: 0 8px 0 0 #cc8b13;
 	--shadow-yellow-hover: 0 8px 0 0 #d99a2c;
-	--shadow-silver: 0 -4px 0 0 #6b8997;
+	--shadow-silver: 0 4px 0 0 #6b8997;
 	--shadow-silver-hover: 0 4px 0 0 #7a9aa9;
 
 	/* === Transitions === */
@@ -153,7 +153,7 @@ svg {
 }
 
 .btn {
-	padding-block: 0.875rem;
+	padding: 0.875rem 1rem;
 	color: var(--dark-navy);
 	border-radius: 1rem;
 
@@ -172,4 +172,6 @@ svg {
 
 .secondary-btn {
 	background-color: var(--silver);
+	color: var(--dark-navy);
+	box-shadow: var(--shadow-silver);
 }

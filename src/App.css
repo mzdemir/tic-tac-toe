@@ -6,12 +6,11 @@ body {
 
 #root {
 	--max-width: 460px;
-	--padding-inline-mobile: 1.5rem;
-	--padding-inline-desktop: 2.5rem;
-	--margin-block-mobile: 1.5rem;
-	--margin-block-desktop: 3.625rem;
-	inline-size: min(var(--max-width), 100% - var(--padding-inline-mobile) * 2);
-	margin-inline: var(--margin-block-mobile) auto;
+	--padding-inline: 1.5rem;
+
+	inline-size: min(var(--max-width), 100% - var(--padding-inline) * 2);
+	margin-inline: auto;
+
 	display: flex;
 	align-items: center;
 	height: 100vh;

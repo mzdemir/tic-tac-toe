@@ -1,47 +1,47 @@
 export default [
 	{
 		id: 1,
-		src: "",
+		turnIcon: "",
 		isHeld: false,
 	},
 	{
 		id: 2,
-		src: "",
+		turnIcon: "",
 		isHeld: false,
 	},
 	{
 		id: 3,
-		src: "",
+		turnIcon: "",
 		isHeld: false,
 	},
 	{
 		id: 4,
-		src: "",
+		turnIcon: "",
 		isHeld: false,
 	},
 	{
 		id: 5,
-		src: "",
+		turnIcon: "",
 		isHeld: false,
 	},
 	{
 		id: 6,
-		src: "",
+		turnIcon: "",
 		isHeld: false,
 	},
 	{
 		id: 7,
-		src: "",
+		turnIcon: "",
 		isHeld: false,
 	},
 	{
 		id: 8,
-		src: "",
+		turnIcon: "",
 		isHeld: false,
 	},
 	{
 		id: 9,
-		src: "",
+		turnIcon: "",
 		isHeld: false,
 	},
 ]

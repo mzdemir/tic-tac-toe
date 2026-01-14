@@ -51,3 +51,14 @@
 	block-size: 6rem;
 	inline-size: 6rem;
 }
+
+.overlay {
+	position: fixed;
+	inset: 0;
+	background-color: rgba(0, 0, 0, 50%);
+	z-index: 1;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

@@ -1,11 +1,7 @@
 import "./MarkSelection.css"
 import {X, O} from "../Marks"
 
-export default function MarkSelection({playerMark, setPlayerMark}) {
-	function getPlayerMark(event) {
-		setPlayerMark(event.target.value)
-	}
-
+export default function MarkSelection({player1Mark, setPlayer1Mark}) {
 	return (
 		<div className="mark-container">
 			<label htmlFor="option1" className="mark x-mark">
@@ -14,8 +10,8 @@ export default function MarkSelection({playerMark, setPlayerMark}) {
 					id="option1"
 					name="toggle"
 					value="X"
-					checked={playerMark === "X"}
-					onChange={getPlayerMark}
+					checked={player1Mark === "X"}
+					onChange={(event) => setPlayer1Mark(event.target.value)}
 				/>
 				<X />
 			</label>
@@ -25,8 +21,8 @@ export default function MarkSelection({playerMark, setPlayerMark}) {
 					id="option2"
 					name="toggle"
 					value="O"
-					checked={playerMark === "O"}
-					onChange={getPlayerMark}
+					checked={player1Mark === "O"}
+					onChange={(event) => setPlayer1Mark(event.target.value)}
 				/>
 				<O />
 			</label>
