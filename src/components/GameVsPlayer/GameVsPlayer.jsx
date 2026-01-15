@@ -83,7 +83,7 @@ export default function GameOn({player1Mark, setIsGameOn}) {
 					<img src={logo} alt="Tic tac toe logo" />
 					<h1 className="turn-indicator body-text">{turnFor === "X" ? <X/> : <O/>} Turn</h1>
 					<button 
-						className="secondary-btn restart-btn" 
+						className="btn-restart" 
 						onClick={() => setIsGameOn([false, ""])}>
 						<img src={restartIcon} alt="restart icon" />
 					</button>
@@ -100,14 +100,20 @@ export default function GameOn({player1Mark, setIsGameOn}) {
 					))}
 				</div>
 				<div className="scoreboard">
-					<p>X {scoreboard.x} {player1Mark === "X" ? "P1": "P2"}</p>
-					<p>Ties {scoreboard.ties}</p>
-					<p>O {scoreboard.o} {player1Mark === "O" ? "P1": "P2"}</p>
+					<p className="x body-text">X ({player1Mark === "X" ? "P1": "P2"}) 
+						<span className="heading-s">{scoreboard.x}</span>
+					</p>
+					<p className="ties body-text">TIES
+						<span className="heading-s">{scoreboard.ties}</span>
+					</p>
+					<p className="o body-text">O ({player1Mark === "O" ? "P1": "P2"})
+						<span className="heading-s">{scoreboard.o}</span>
+					</p>
 				</div>
 			</div>
 			{isRoundOver && 
 			<div className="overlay">
-				<RoundOver winner handleNextRound={handleNextRound} setIsGameOn={setIsGameOn}/>
+				<RoundOver winner={winner} handleNextRound={handleNextRound} setIsGameOn={setIsGameOn}/>
 			</div>
 			}
 		</>

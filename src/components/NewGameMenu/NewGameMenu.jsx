@@ -16,12 +16,12 @@ export default function NewGameMenu({player1Mark, setPlayer1Mark, setIsGameOn}) 
 			
 			<div className="new-game-btns">
 				<button 
-					className="btn primary-btn-1 heading-xs" 
+					className="btn-1 heading-xs" 
 					onClick={() => setIsGameOn([true, "vsCpu"])}>
 					NEW GAME (VS CPU)
 				</button>
 				<button 
-					className="btn primary-btn-2 heading-xs"
+					className="btn-2 heading-xs"
 					onClick={() => setIsGameOn([true, "vsPlayer"])}>
 					NEW GAME (VS PLAYER)
 				</button>

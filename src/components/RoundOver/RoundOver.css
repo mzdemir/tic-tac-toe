@@ -14,7 +14,24 @@
 }
 
 .winner-mark {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
 	color: var(--yellow-light);
+}
+
+.X {
+	color: var(--cyan);
+}
+
+.winner-mark svg {
+	inline-size: 1.75rem;
+	block-size: 1.75rem;
+}
+
+.winner-mark,
+.tied {
+	margin-block: 1rem 1.5rem;
 }
 
 .btns {
