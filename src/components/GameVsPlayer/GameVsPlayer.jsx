@@ -75,7 +75,6 @@ export default function GameOn({player1Mark, setIsGameOn}) {
 		setWinner(null)
 	}
 
-	// prettier-ignore
 	return (
 		<>
 			<div className="game-on-container">
