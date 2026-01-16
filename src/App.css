@@ -28,12 +28,11 @@ body {
 
 .main-header {
 	background-color: var(--semi-dark-navy);
-	padding: 1.5rem;
+	padding: 1.5rem 1.5rem 1.875rem;
 	border-radius: 1rem;
 	text-align: center;
 
-	margin-block-end: 0.5rem;
-	box-shadow: var(--shadow-md);
+	box-shadow: inset var(--shadow-md);
 }
 
 .new-game-btns {

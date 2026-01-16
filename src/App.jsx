@@ -15,7 +15,7 @@ export default function App() {
 		!isGameOn[0] 
 		? <NewGameMenu player1Mark={player1Mark}  setPlayer1Mark={setPlayer1Mark} setIsGameOn={setIsGameOn} /> 
 	 	: isGameOn[0] === true && isGameOn[1] === "vsCpu" 
-		? <GameVsCpu />
+		? <GameVsCpu player1Mark={player1Mark} setIsGameOn={setIsGameOn}  />
 		: isGameOn[0] === true && isGameOn[1] === "vsPlayer" 
 		? <GameVsPlayer player1Mark={player1Mark} setIsGameOn={setIsGameOn}  /> 
 		: null

@@ -15,6 +15,7 @@ export default function GameOn({player1Mark, setIsGameOn}) {
 	const [isRoundOver, setIsRoundOver] = useState(false) //check if round is over
 	const [scoreboard, setScoreboard] = useState({x: 0, o: 0, ties: 0}) //populate scoreboard
 	const [winner, setWinner] = useState(null) //get the winner mark and player
+	const [restart, setRestart] = useState(false)
 
 	const winConditions = [
 		[1, 2, 3],
@@ -27,18 +28,17 @@ export default function GameOn({player1Mark, setIsGameOn}) {
 		[3, 5, 7],
 	]
 
+	//prettier-ignore
 	function handleTurn(id) {
 		//check whose turn to play (x goes first)
 		const currentPlayer = turnFor
-		setCells((prevCells) =>
-			prevCells.map((item) =>
+		setCells((prevCells) => prevCells.map((item) =>
 				item.id === id ? {...item, turnIcon: currentPlayer === "X" ? "X" : "O", isHeld: true} : item
 			)
 		)
 
 		//check who wins, loses or it is tie
 		const newMoves = turnFor === "X" ? {...moves, x: [...moves.x, id]} : {...moves, o: [...moves.o, id]}
-
 		setMoves(newMoves)
 
 		const xWon = winConditions.some((condition) => condition.every((num) => newMoves.x.includes(num)))
@@ -59,6 +59,7 @@ export default function GameOn({player1Mark, setIsGameOn}) {
 	//populate scoreboard
 	useEffect(() => {
 		if (winner) {
+			// eslint-disable-next-line react-hooks/set-state-in-effect
 			setScoreboard((prev) => {
 				if (winner.mark === "X") return {...prev, x: prev.x + 1}
 				if (winner.mark === "O") return {...prev, o: prev.o + 1}
@@ -75,47 +76,49 @@ export default function GameOn({player1Mark, setIsGameOn}) {
 		setWinner(null)
 	}
 
+	// prettier-ignore
 	return (
-		<>
-			<div className="game-on-container">
-				<header className="game-on-header">
-					<img src={logo} alt="Tic tac toe logo" />
-					<h1 className="turn-indicator body-text">{turnFor === "X" ? <X/> : <O/>} Turn</h1>
-					<button 
-						className="btn-restart" 
-						onClick={() => setIsGameOn([false, ""])}>
-						<img src={restartIcon} alt="restart icon" />
+	<>
+		<div className="game-on-container">
+			<header className="game-on-header">
+				<img src={logo} alt="Tic tac toe logo" />
+				<h1 className="turn-indicator body-text">{turnFor === "X" ? <X /> : <O />} Turn</h1>
+				<button className="btn-restart" onClick={() => setRestart(true)}>
+					<img src={restartIcon} alt="restart icon" />
+				</button>
+			</header>
+			<div className="board">
+				{cells.map((cell) => (
+					<button
+						className={`cell ${cell.turnIcon === "X" ? "x" : "o"}`}
+						key={cell.id}
+						onClick={() => handleTurn(cell.id)}
+						disabled={cell.isHeld || isRoundOver}>
+						{cell.turnIcon === "X" && <X />}
+						{cell.turnIcon === "O" && <O />}
 					</button>
-				</header>
-				<div className="board">
-					{cells.map((cell) => (
-						<button className="cell" 
-							key={cell.id} 
-							onClick={() => handleTurn(cell.id)}
-							disabled={cell.isHeld || isRoundOver}>
-							{cell.turnIcon === "X" && <X />}
-							{cell.turnIcon === "O" && <O />}
-						</button>
-					))}
-				</div>
-				<div className="scoreboard">
-					<p className="x body-text">X ({player1Mark === "X" ? "P1": "P2"}) 
-						<span className="heading-s">{scoreboard.x}</span>
-					</p>
-					<p className="ties body-text">TIES
-						<span className="heading-s">{scoreboard.ties}</span>
-					</p>
-					<p className="o body-text">O ({player1Mark === "O" ? "P1": "P2"})
-						<span className="heading-s">{scoreboard.o}</span>
-					</p>
-				</div>
+				))}
 			</div>
-			{isRoundOver && 
+			<div className="scoreboard">
+				<p className="x body-text">
+					X ({player1Mark === "X" ? "P1" : "P2"})<span className="heading-s">{scoreboard.x}</span>
+				</p>
+				<p className="ties body-text">
+					TIES <span className="heading-s">{scoreboard.ties}</span>
+				</p>
+				<p className="o body-text">
+					O ({player1Mark === "O" ? "P1" : "P2"})<span className="heading-s">{scoreboard.o}</span>
+				</p>
+			</div>
+		</div>
+		{(isRoundOver || restart) && (
 			<div className="overlay">
-				<RoundOver winner={winner} handleNextRound={handleNextRound} setIsGameOn={setIsGameOn}/>
+				<RoundOver winner={winner} handleNextRound={handleNextRound} 
+					setIsGameOn={setIsGameOn} restart={restart} setRestart={setRestart}
+				/>
 			</div>
-			}
-		</>
+		)}
+	</>
 	)
 }
 
