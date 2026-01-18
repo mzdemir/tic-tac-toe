@@ -2,8 +2,7 @@ import logo from "../../assets/logo.svg"
 
 import MarkSelection from "../MarkSelection/MarkSelection"
 
-export default function NewGameMenu({player1Mark, setPlayer1Mark, setIsGameOn}) {
-	//prettier-ignore
+export default function NewGameMenu({player1Mark, setPlayer1Mark, setIsGameOn, setOpponent}) {
 	return (
 		<div className="new-game-menu">
 			<img src={logo} alt="Tic tac toe logo" />
@@ -13,16 +12,22 @@ export default function NewGameMenu({player1Mark, setPlayer1Mark, setIsGameOn}) 
 				<MarkSelection player1Mark={player1Mark} setPlayer1Mark={setPlayer1Mark} />
 				<p className="body-text">REMEMBER : X GOES FIRST</p>
 			</header>
-			
+
 			<div className="new-game-btns">
-				<button 
-					className="btn-1 heading-xs" 
-					onClick={() => setIsGameOn([true, "vsCpu"])}>
+				<button
+					className="btn-1 heading-xs"
+					onClick={() => {
+						setIsGameOn(true)
+						setOpponent("cpu")
+					}}>
 					NEW GAME (VS CPU)
 				</button>
-				<button 
+				<button
 					className="btn-2 heading-xs"
-					onClick={() => setIsGameOn([true, "vsPlayer"])}>
+					onClick={() => {
+						setIsGameOn(true)
+						setOpponent("player")
+					}}>
 					NEW GAME (VS PLAYER)
 				</button>
 			</div>

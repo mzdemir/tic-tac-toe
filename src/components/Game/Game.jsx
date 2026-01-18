@@ -1,14 +1,16 @@
-import "./GameVsPlayer.css"
+/* eslint-disable react-hooks/exhaustive-deps */
+import "./Game.css"
 import logo from "../../assets/logo.svg"
 import restartIcon from "../../assets/icon-restart.svg"
 import cellsData from "../../assets/cells"
+// import {getBestMove} from "../../utils/minimax"
 
 import {X, O} from "../Marks"
 import RoundOver from "../RoundOver/RoundOver"
 
 import {useState, useEffect} from "react"
 
-export default function GameOn({player1Mark, setIsGameOn}) {
+export default function GameOn({player1Mark, setIsGameOn, opponent}) {
 	const [cells, setCells] = useState(cellsData) // populate the game board with 3x3 cells
 	const [turnFor, setTurnFor] = useState("X") //check whose turn to play (x goes first)
 	const [moves, setMoves] = useState({x: [], o: []}) //check who wins, losts or is it tie
@@ -56,18 +58,6 @@ export default function GameOn({player1Mark, setIsGameOn}) {
 		if (tie) setWinner({message: "Round Tied"})
 	}
 
-	//populate scoreboard
-	useEffect(() => {
-		if (winner) {
-			// eslint-disable-next-line react-hooks/set-state-in-effect
-			setScoreboard((prev) => {
-				if (winner.mark === "X") return {...prev, x: prev.x + 1}
-				if (winner.mark === "O") return {...prev, o: prev.o + 1}
-				return {...prev, ties: prev.ties + 1}
-			})
-		}
-	}, [winner])
-
 	function handleNextRound() {
 		setCells(cellsData)
 		setTurnFor("X")
@@ -75,6 +65,45 @@ export default function GameOn({player1Mark, setIsGameOn}) {
 		setMoves({x: [], o: []})
 		setWinner(null)
 	}
+
+	// Cpu makes random moves
+	useEffect(() => {
+		if (opponent === "cpu") {
+			if (turnFor !== player1Mark && !isRoundOver) {
+				const remainingCells = cells.filter((cell) => !cell.isHeld).map((c) => c.id)
+				const randomCell = Math.floor(Math.random() * remainingCells.length)
+				setTimeout(() => handleTurn(remainingCells[randomCell]), 400)
+			}
+		}
+	}, [turnFor])
+
+	// // Cpu makes clever moves
+	// useEffect(() => {
+	// 	const cpuMark = player1Mark === "X" ? "O" : "X"
+	// 	const cpuMovesKey = cpuMark === "X" ? "x" : "o"
+	// 	const playerMovesKey = player1Mark === "X" ? "x" : "o"
+
+	// 	if (opponent === "cpu") {
+	// 		if (turnFor === cpuMark && !isRoundOver) {
+	// 			// prettier-ignore
+	// 			const bestMove = getBestMove({cells, moves, cpuMovesKey, playerMovesKey, cpuMark, player1Mark, winConditions, cellsData, difficulty: 1,})
+	// 			if (bestMove !== null) {
+	// 				setTimeout(() => handleTurn(bestMove), 400)
+	// 			}
+	// 		}
+	// 	}
+	// }, [turnFor])
+
+	//populate scoreboard
+	useEffect(() => {
+		if (winner) {
+			setScoreboard((prev) => {
+				if (winner.mark === "X") return {...prev, x: prev.x + 1}
+				if (winner.mark === "O") return {...prev, o: prev.o + 1}
+				return {...prev, ties: prev.ties + 1}
+			})
+		}
+	}, [winner])
 
 	// prettier-ignore
 	return (
@@ -101,13 +130,15 @@ export default function GameOn({player1Mark, setIsGameOn}) {
 			</div>
 			<div className="scoreboard">
 				<p className="x body-text">
-					X ({player1Mark === "X" ? "P1" : "P2"})<span className="heading-s">{scoreboard.x}</span>
+					X ({opponent === "player" ? (player1Mark === "X" ? "P1" : "P2") : (player1Mark === "X" ? "YOU" : "CPU")})
+					<span className="heading-s">{scoreboard.x}</span>
 				</p>
 				<p className="ties body-text">
 					TIES <span className="heading-s">{scoreboard.ties}</span>
 				</p>
 				<p className="o body-text">
-					O ({player1Mark === "O" ? "P1" : "P2"})<span className="heading-s">{scoreboard.o}</span>
+					O ({opponent === "player" ? (player1Mark === "O" ? "P1" : "P2") : (player1Mark === "O" ? "YOU" : "CPU")})
+					<span className="heading-s">{scoreboard.o}</span>
 				</p>
 			</div>
 		</div>

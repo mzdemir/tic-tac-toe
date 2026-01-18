@@ -1,23 +1,21 @@
 import "./App.css"
 
 import NewGameMenu from "./components/NewGameMenu/NewGameMenu"
-import GameVsPlayer from "./components/GameVsPlayer/GameVsPlayer"
-import GameVsCpu from "./components/GameVsCpu/GameVsCpu"
+import Game from "./components/Game/Game"
 
 import {useState} from "react"
 
 export default function App() {
 	const [player1Mark, setPlayer1Mark] = useState("X")
-	const [isGameOn, setIsGameOn] = useState([false, ""])
+	const [isGameOn, setIsGameOn] = useState(false)
+	const [opponent, setOpponent] = useState("")
 
 	// prettier-ignore
 	return ( 
-		!isGameOn[0] 
-		? <NewGameMenu player1Mark={player1Mark}  setPlayer1Mark={setPlayer1Mark} setIsGameOn={setIsGameOn} /> 
-	 	: isGameOn[0] === true && isGameOn[1] === "vsCpu" 
-		? <GameVsCpu player1Mark={player1Mark} setIsGameOn={setIsGameOn}  />
-		: isGameOn[0] === true && isGameOn[1] === "vsPlayer" 
-		? <GameVsPlayer player1Mark={player1Mark} setIsGameOn={setIsGameOn}  /> 
+		!isGameOn
+		? <NewGameMenu player1Mark={player1Mark}  setPlayer1Mark={setPlayer1Mark} setIsGameOn={setIsGameOn} setOpponent={setOpponent}/> 
+	 	: isGameOn === true
+		? <Game player1Mark={player1Mark} setIsGameOn={setIsGameOn} opponent={opponent} /> 
 		: null
 	)
 }

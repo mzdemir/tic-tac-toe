@@ -27,13 +27,13 @@ export function checkWinner(simMoves, winConditions) {
 // 0  → tie
 // -1 → CPU will lose
 
-export function minimax({simMoves, isMaximizing, cpuMark, playerMark, cpuMovesKey, playerMovesKey, winConditions, cellsData}) {
+export function minimax({simMoves, isMaximizing, cpuMark, player1Mark, cpuMovesKey, playerMovesKey, winConditions, cellsData}) {
 	// First, check if the current simulated board already resulted in a win or tie
 	const result = checkWinner(simMoves, winConditions)
 	// If CPU has won in this simulation, this branch is good for CPU → return +1
 	if (result === cpuMark) return 1
 	// If Player has won, this branch is bad for CPU → return -1
-	if (result === playerMark) return -1
+	if (result === player1Mark) return -1
 	// If it's a tie, neither side gains advantage → return 0
 	if (result === "tie") return 0
 	// Get all available squares that are NOT used in the simulated moves.
@@ -50,7 +50,7 @@ export function minimax({simMoves, isMaximizing, cpuMark, playerMark, cpuMovesKe
 			// Recursively evaluate this move, now switching to player's turn
 			// Keep the best possible score for CPU
 			best = Math.max(best,minimax(
-				{simMoves: nextMoves, isMaximizing: false, cpuMark, playerMark, cpuMovesKey, playerMovesKey, winConditions, cellsData}
+				{simMoves: nextMoves, isMaximizing: false, cpuMark, player1Mark, cpuMovesKey, playerMovesKey, winConditions, cellsData}
 			))
 		}
 		// Return the best outcome CPU can guarantee
@@ -67,7 +67,7 @@ export function minimax({simMoves, isMaximizing, cpuMark, playerMark, cpuMovesKe
 			// Recursively evaluate this move, now switching back to CPU's turn
 			// Player picks the move that hurts CPU the most
 			best = Math.min(best, minimax(
-				{simMoves: nextMoves, isMaximizing: true, cpuMark, playerMark, cpuMovesKey, playerMovesKey, winConditions, cellsData}
+				{simMoves: nextMoves, isMaximizing: true, cpuMark, player1Mark, cpuMovesKey, playerMovesKey, winConditions, cellsData}
 			))
 		}
 		// Return the best outcome player can force
@@ -75,9 +75,9 @@ export function minimax({simMoves, isMaximizing, cpuMark, playerMark, cpuMovesKe
 	}
 }
 
-// This function decides which move the CPU will playon the REAL board.
-// Unlike perfect minimax, this version is intentionallyimperfect to make the game beatable.
-export function getBestMove({cells, moves, cpuMovesKey, playerMovesKey, cpuMark, playerMark, winConditions, cellsData, difficulty = 1}) {
+// This function decides which move the CPU will play on the REAL board.
+// Unlike perfect minimax, this version is intentionally imperfect to make the game beatable.
+export function getBestMove({cells, moves, cpuMovesKey, playerMovesKey, cpuMark, player1Mark, winConditions, cellsData, difficulty = 1}) {
 	// If there are no available moves, return null (tie or game over)
 	if (cells.every((cell) => cell.isHeld)) return null
 	// moveScores will store EVERY possible CPU moveetogether with its minimax evaluation score.
@@ -90,7 +90,7 @@ export function getBestMove({cells, moves, cpuMovesKey, playerMovesKey, cpuMark,
 		// Create a simulated board state where the CPU plays at position "id"
 		const testMoves = {...moves, [cpuMovesKey]: [...moves[cpuMovesKey], id]}
 		// Score this simulated move assuming the player goes next
-		const score = minimax({simMoves: testMoves, isMaximizing: false, cpuMark, playerMark, cpuMovesKey, playerMovesKey, winConditions, cellsData})
+		const score = minimax({simMoves: testMoves, isMaximizing: false, cpuMark, player1Mark, cpuMovesKey, playerMovesKey, winConditions, cellsData})
 		// Store the move and its score for later comparison
 		moveScores.push({id, score})
 	}
