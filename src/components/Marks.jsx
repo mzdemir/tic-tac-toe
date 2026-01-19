@@ -1,6 +1,6 @@
-export function X() {
+export function X({className, isAriaHidden}) {
 	return (
-		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+		<svg className={className} aria-hidden={isAriaHidden} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
 			<path
 				d="M51.12 1.269c.511 0 1.023.195 1.414.586l9.611 9.611c.391.391.586.903.586 1.415s-.195 
 					1.023-.586 1.414L44.441 32l17.704 17.705c.391.39.586.902.586 1.414 0 .512-.195 1.024-.586 
@@ -17,9 +17,9 @@ export function X() {
 	)
 }
 
-export function O() {
+export function O({className, isAriaHidden}) {
 	return (
-		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66 66">
+		<svg className={className} aria-hidden={isAriaHidden} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66 66">
 			<path
 				d="M33 1c17.673 0 32 14.327 32 32 0 17.673-14.327 32-32 32C15.327 65 1 50.673 1 33 1 
 					15.327 15.327 1 33 1Zm0 18.963c-7.2 0-13.037 5.837-13.037 13.037 0 7.2 5.837 13.037 

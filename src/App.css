@@ -5,8 +5,8 @@ body {
 }
 
 #root {
-	--max-width: 460px;
-	--padding-inline: 1.5rem;
+	--max-width: 28.75rem; /*460px */
+	--padding-inline: var(--space-2xl);
 
 	inline-size: min(var(--max-width), 100% - var(--padding-inline) * 2);
 	margin-inline: auto;
@@ -19,7 +19,7 @@ body {
 .new-game-menu {
 	inline-size: 100%;
 	display: grid;
-	gap: 2rem;
+	gap: var(--space-4xl);
 }
 
 .new-game-menu img {
@@ -27,9 +27,9 @@ body {
 }
 
 .main-header {
-	background-color: var(--semi-dark-navy);
-	padding: 1.5rem 1.5rem 1.875rem;
-	border-radius: 1rem;
+	background-color: var(--surface);
+	padding: var(--space-2xl) var(--space-2xl) var(--space-4xl);
+	border-radius: var(--radius-lg);
 	text-align: center;
 
 	box-shadow: inset var(--shadow-md);
@@ -37,5 +37,15 @@ body {
 
 .new-game-btns {
 	display: grid;
-	gap: 1rem;
+	gap: var(--space-lg);
+}
+
+@media (min-width: 48rem) {
+	.new-game-menu {
+		gap: var(--space-6xl);
+	}
+
+	.new-game-btns {
+		gap: var(--space-2xl);
+	}
 }

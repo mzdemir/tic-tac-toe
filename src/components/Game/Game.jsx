@@ -113,24 +113,35 @@ export default function GameOn({player1Mark, setIsGameOn, opponent}) {
 			<div className="game-on-container">
 				<header className="game-on-header">
 					<img src={logo} alt="Tic tac toe logo" />
-					<h1 className="turn-indicator body-text">{turnFor === "X" ? <X /> : <O />} Turn</h1>
-					<button className="btn-restart" onClick={() => setRestart(true)}>
+					<h1 className="turn-indicator body-text" aria-live="polite" aria-atomic="true">
+						{turnFor === "X" ? <X /> : <O />} Turn
+					</h1>
+					<button className="btn-restart" onClick={() => setRestart(true)} aria-label="Restart game">
 						<img src={restartIcon} alt="restart icon" />
 					</button>
 				</header>
-				<div className="board">
+				<div className="board" role="grid" aria-label="Tic tac toe game board">
 					{cells.map((cell) => (
 						<button
 							className={`cell ${cell.turnIcon === "X" ? "x" : "o"}`}
 							key={cell.id}
 							onClick={() => handleTurn(cell.id)}
 							disabled={cell.isHeld || isRoundOver || !isHumanTurn}>
-							{cell.turnIcon === "X" && <X />}
-							{cell.turnIcon === "O" && <O />}
+							{cell.isHeld && cell.turnIcon === "X" && <X />}
+							{cell.isHeld && cell.turnIcon === "O" && <O />}
+
+							{/* hover state */}
+							{!cell.isHeld && isHumanTurn && turnFor === "X" && (
+								<X className="cell-hover x" isAriaHidden={true} />
+							)}
+
+							{!cell.isHeld && isHumanTurn && turnFor === "O" && (
+								<O className="cell-hover o" isAriaHidden={true}/>
+							)}
 						</button>
 					))}
 				</div>
-				<div className="scoreboard">
+				<div className="scoreboard" role="region" aria-live="polite" aria-label="Game scores">
 					<p className="x body-text">
 						X ({opponent === "player" ? (player1Mark === "X" ? "P1" : "P2") : (player1Mark === "X" ? "YOU" : "CPU")})
 						<span className="heading-s">{scoreboard.x}</span>
@@ -145,7 +156,7 @@ export default function GameOn({player1Mark, setIsGameOn, opponent}) {
 				</div>
 			</div>
 			{(isRoundOver || restart) && (
-				<div className="overlay">
+				<div className="overlay" aria-hidden="false">
 					<RoundOver winner={winner} handleNextRound={handleNextRound} 
 						setIsGameOn={setIsGameOn} restart={restart} setRestart={setRestart}
 					/>

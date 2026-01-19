@@ -1,12 +1,12 @@
 .mark-container {
 	position: relative;
 	block-size: 4.5rem;
-	background-color: var(--dark-navy);
+	background-color: var(--background);
 	padding: 0.5rem;
 
 	display: flex;
-	margin-block: 1.5rem;
-	border-radius: 0.625rem;
+	margin-block: var(--space-2xl) var(--space-lg);
+	border-radius: var(--radius-md);
 }
 
 .mark-container input {
@@ -24,6 +24,11 @@
 
 	cursor: pointer;
 	transition: color 0s ease;
+	border-radius: var(--radius-md);
+}
+
+.mark:hover {
+	background-color: hsla(var(--silver) / 5%);
 }
 
 .mark svg {
@@ -35,10 +40,10 @@
 .slider {
 	position: absolute;
 
-	background-color: var(--silver);
+	background-color: var(--text-primary);
 	inline-size: calc(50% - 0.5rem);
 	block-size: calc(100% - 1rem);
-	border-radius: 0.625rem;
+	border-radius: var(--radius-md);
 
 	transition: transform 0.25s ease;
 }
@@ -48,9 +53,9 @@
 }
 
 .mark-container:has(#option1:checked) .x-mark {
-	color: var(--dark-navy);
+	color: var(--background);
 }
 
 .mark-container:has(#option2:checked) .o-mark {
-	color: var(--dark-navy);
+	color: var(--background);
 }

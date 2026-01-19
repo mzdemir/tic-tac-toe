@@ -1,12 +1,12 @@
 .round-over {
-	background-color: var(--semi-dark-navy);
+	background-color: var(--surface);
 	padding-block: 3rem;
 	inline-size: 100%;
 
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 1rem;
+	gap: var(--space-lg);
 }
 
 .winner-player {
@@ -17,12 +17,12 @@
 .winner-mark {
 	display: flex;
 	align-items: center;
-	gap: 0.5rem;
-	color: var(--yellow-light);
+	gap: var(--space-sm);
+	color: var(--secondary);
 }
 
 .X {
-	color: var(--cyan);
+	color: var(--primary);
 }
 
 .winner-mark svg {
@@ -32,10 +32,35 @@
 
 .winner-mark,
 .tied {
-	margin-block-end: 0.5rem;
+	margin-block-end: var(--space-sm);
 }
 
 .btns {
 	display: flex;
-	gap: 1rem;
+	gap: var(--space-lg);
+}
+
+@media (min-width: 48rem) {
+	.round-over {
+		gap: var(--space-2xl);
+	}
+
+	.winner-player {
+		font-size: var(--fs-heading-xs);
+	}
+
+	.winner-mark {
+		gap: var(--space-2xl);
+	}
+
+	.winner-mark svg {
+		inline-size: 4rem;
+		block-size: 4rem;
+	}
+
+	.winner-mark,
+	.tied {
+		font-size: var(--fs-heading-l);
+		margin-block-end: var(--space-sm);
+	}
 }
